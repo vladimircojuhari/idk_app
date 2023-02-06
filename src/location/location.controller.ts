@@ -17,7 +17,6 @@ export class LocationController {
     let schemas = createLocationDto.map(el => LocationMapper.mapToSchema(el));
 
     schemas.forEach(el => this.locationService.create(el));
-
     this.getway.sendMessage(schemas);
   }
 
