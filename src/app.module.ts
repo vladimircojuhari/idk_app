@@ -6,16 +6,27 @@ import { DriverModule } from './driver/driver.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { RoutesModule } from './routes/routes.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+
 
 @Module({
   imports: [
-    LocationModule, 
+    LocationModule,
     DriverModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/kinda'),
+    MongooseModule.forRootAsync({
+      useFactory: () => ({
+        uri: process.env.CONNECTION_STRING,
+      }),
+    }),
     RoutesModule,
-    AuthModule
+    AuthModule,
+    ConfigModule.forRoot(
+      {
+        isGlobal: true
+      }
+    )
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
