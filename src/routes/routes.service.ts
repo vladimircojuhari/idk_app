@@ -7,15 +7,9 @@ import { RoutesRepository } from './routes.repository';
 
 @Injectable()
 export class RoutesService {
-
-  constructor(
-    private routesRepository: RoutesRepository
-  ) {
-    
-  }
+  constructor(private routesRepository: RoutesRepository) {}
 
   create(route: Route) {
-
     route.create_date = +new Date();
 
     return this.routesRepository.create(route);
@@ -25,12 +19,18 @@ export class RoutesService {
     return this.routesRepository.find({});
   }
 
+  findByDriver(driver_id: string) {
+    return this.routesRepository.find({
+      driver_id: driver_id,
+    });
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} route`;
   }
 
   update(id: string, updateRoute: UpdateRouteDto) {
-    this.routesRepository.update({_id: id}, updateRoute);
+    this.routesRepository.update({ _id: id }, updateRoute);
   }
 
   remove(id: number) {
