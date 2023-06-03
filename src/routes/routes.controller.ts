@@ -32,9 +32,9 @@ export class RoutesController {
     return routes;
   }
 
-  @Get('driver/:id')
-  async findByDriverAll() {
-    let routes = await this.routesService.findAll();
+  @Get('driver/:driver_id')
+  async findByDriverAll(@Param('driver_id') driver_id: string) {
+    let routes = await this.routesService.findByDriver(driver_id);
     return routes;
   }
 
