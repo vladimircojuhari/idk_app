@@ -7,7 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { RoutesModule } from './routes/routes.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-
+import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
@@ -20,13 +20,12 @@ import { ConfigModule } from '@nestjs/config';
     }),
     RoutesModule,
     AuthModule,
-    ConfigModule.forRoot(
-      {
-        isGlobal: true
-      }
-    )
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    CompanyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
